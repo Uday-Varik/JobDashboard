@@ -72,8 +72,8 @@ export default function ContactsPage() {
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">Contacts</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Recruiters and hiring managers across all applications</p>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Contacts</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Recruiters and hiring managers across all applications</p>
         </div>
         <Button size="sm" onClick={() => setOpen(true)}>
           <Plus className="w-4 h-4 mr-1.5" />
@@ -82,7 +82,7 @@ export default function ContactsPage() {
       </div>
 
       <div className="relative mb-4 max-w-xs">
-        <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-gray-400" />
+        <Search className="absolute left-2.5 top-2.5 w-4 h-4 text-gray-400 dark:text-gray-500" />
         <Input
           placeholder="Search contacts..."
           value={search}
@@ -92,22 +92,22 @@ export default function ContactsPage() {
       </div>
 
       {loading ? (
-        <div className="text-sm text-gray-400">Loading...</div>
+        <div className="text-sm text-gray-400 dark:text-gray-500">Loading...</div>
       ) : filtered.length === 0 ? (
-        <div className="text-sm text-gray-400 text-center py-16">
+        <div className="text-sm text-gray-400 dark:text-gray-500 text-center py-16">
           No contacts yet. Click "Add Contact" to get started.
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-100 bg-gray-50">
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">Name</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">Role</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">Email</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">Phone</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">LinkedIn</th>
-                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500">Linked Application</th>
+              <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">Name</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">Role</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">Email</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">Phone</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">LinkedIn</th>
+                <th className="text-left px-4 py-2.5 text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500">Linked Application</th>
                 <th className="px-4 py-2.5" />
               </tr>
             </thead>
@@ -115,16 +115,16 @@ export default function ContactsPage() {
               {filtered.map((c) => {
                 const linkedApp = applications.find((a) => a.id === c.application_id);
                 return (
-                  <tr key={c.id} className="border-b border-gray-50 hover:bg-gray-50/50">
+                  <tr key={c.id} className="border-b border-gray-50 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-900/50">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
-                          <User className="w-3.5 h-3.5 text-gray-400" />
+                        <div className="w-7 h-7 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center flex-shrink-0">
+                          <User className="w-3.5 h-3.5 text-gray-400 dark:text-gray-500" />
                         </div>
-                        <span className="font-medium text-gray-900">{c.name}</span>
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{c.name}</span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-gray-500">{c.role ?? "—"}</td>
+                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500">{c.role ?? "—"}</td>
                     <td className="px-4 py-3">
                       {c.email ? (
                         <a href={`mailto:${c.email}`} className="flex items-center gap-1.5 text-blue-600 hover:underline">
@@ -135,7 +135,7 @@ export default function ContactsPage() {
                     </td>
                     <td className="px-4 py-3">
                       {c.phone ? (
-                        <a href={`tel:${c.phone}`} className="flex items-center gap-1.5 text-gray-600 hover:text-gray-900">
+                        <a href={`tel:${c.phone}`} className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:text-gray-100">
                           <Phone className="w-3.5 h-3.5" />
                           {c.phone}
                         </a>
@@ -149,13 +149,13 @@ export default function ContactsPage() {
                         </a>
                       ) : "—"}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">
+                    <td className="px-4 py-3 text-gray-500 dark:text-gray-400 dark:text-gray-500 text-xs">
                       {linkedApp
                         ? `${linkedApp.company?.name ?? "?"} · ${linkedApp.role_title}`
                         : "—"}
                     </td>
                     <td className="px-4 py-3">
-                      <button onClick={() => deleteContact(c.id)} className="text-gray-400 hover:text-red-500 float-right">
+                      <button onClick={() => deleteContact(c.id)} className="text-gray-400 dark:text-gray-500 hover:text-red-500 float-right">
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </td>
@@ -196,7 +196,7 @@ export default function ContactsPage() {
               <Input placeholder="https://linkedin.com/in/..." value={form.linkedin} onChange={set("linkedin")} />
             </div>
             <div className="space-y-1.5">
-              <Label>Link to Application <span className="text-gray-400 font-normal">(optional)</span></Label>
+              <Label>Link to Application <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span></Label>
               <Select
                 value={form.application_id}
                 onValueChange={(v) => setForm((p) => ({ ...p, application_id: v === "none" ? null : v }))}

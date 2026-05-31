@@ -129,7 +129,7 @@ export function VolumeChart({ applications }: Props) {
       <CardContent>
         <ResponsiveContainer width="100%" height={240}>
           <BarChart data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <CartesianGrid strokeDasharray="3 3" stroke="currentColor" className="text-gray-100 dark:text-gray-800" />
             <XAxis
               dataKey="label"
               tick={{ fontSize: 11, fill: "#9ca3af" }}

@@ -26,7 +26,7 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-64 text-gray-400 text-sm">
+      <div className="flex items-center justify-center h-64 text-gray-400 dark:text-gray-500 text-sm">
         Loading...
       </div>
     );
@@ -35,8 +35,8 @@ export default function DashboardPage() {
   return (
     <div className="p-8 space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-gray-900">Overview</h1>
-        <p className="text-sm text-gray-500 mt-0.5">Your job search at a glance</p>
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Overview</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Your job search at a glance</p>
       </div>
 
       <StatsCards data={analytics} />
@@ -51,16 +51,16 @@ export default function DashboardPage() {
       <div className="grid grid-cols-2 gap-4">
         <InsightsPanel analytics={analytics} />
 
-        <Card className="border-gray-200">
+        <Card className="border-gray-200 dark:border-gray-700">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-semibold text-gray-700 flex items-center gap-1.5">
+            <CardTitle className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5">
               <CalendarClock className="w-4 h-4 text-amber-500" />
               Upcoming Follow-ups
             </CardTitle>
           </CardHeader>
           <CardContent>
             {upcoming.length === 0 ? (
-              <p className="text-sm text-gray-400 text-center py-4">No pending follow-ups</p>
+              <p className="text-sm text-gray-400 dark:text-gray-500 text-center py-4">No pending follow-ups</p>
             ) : (
               <div className="space-y-2">
                 {upcoming.map((f) => {
@@ -70,7 +70,7 @@ export default function DashboardPage() {
                       key={f.id}
                       className={cn(
                         "flex items-start justify-between p-2.5 rounded-lg border text-sm",
-                        overdue ? "border-red-200 bg-red-50" : "border-gray-200"
+                        overdue ? "border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950" : "border-gray-200 dark:border-gray-700"
                       )}
                     >
                       <div className="min-w-0">
@@ -79,11 +79,11 @@ export default function DashboardPage() {
                           {(f.application as { role_title?: string } | undefined)?.role_title ?? "—"}
                         </p>
                         {f.message && (
-                          <p className="text-xs text-gray-500 truncate mt-0.5">{f.message}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 truncate mt-0.5">{f.message}</p>
                         )}
                       </div>
                       <div className="ml-2 flex-shrink-0 flex flex-col items-end gap-1">
-                        <span className={cn("text-xs font-medium", overdue ? "text-red-600" : "text-gray-500")}>
+                        <span className={cn("text-xs font-medium", overdue ? "text-red-600 dark:text-red-400" : "text-gray-500 dark:text-gray-400 dark:text-gray-500")}>
                           {isToday(new Date(f.due_date))
                             ? "Today"
                             : format(new Date(f.due_date), "MMM d")}

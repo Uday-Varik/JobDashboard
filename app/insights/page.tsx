@@ -14,13 +14,13 @@ export default function InsightsPage() {
   const { applications, loading } = useApplications();
   const analytics = useAnalytics(applications);
 
-  if (loading) return <div className="p-8 text-sm text-gray-400">Loading...</div>;
+  if (loading) return <div className="p-8 text-sm text-gray-400 dark:text-gray-500">Loading...</div>;
 
   return (
     <div className="p-8 space-y-6">
       <div>
-        <h1 className="text-xl font-semibold text-gray-900">AI Insights</h1>
-        <p className="text-sm text-gray-500 mt-0.5">Data-driven coaching from your job search pipeline</p>
+        <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">AI Insights</h1>
+        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Data-driven coaching from your job search pipeline</p>
       </div>
 
       <StatsCards data={analytics} />
@@ -32,9 +32,9 @@ export default function InsightsPage() {
 
       <InsightsPanel analytics={analytics} />
 
-      <Card className="border-gray-200">
+      <Card className="border-gray-200 dark:border-gray-700">
         <CardHeader className="pb-2">
-          <CardTitle className="text-sm font-semibold text-gray-700">Stage Breakdown</CardTitle>
+          <CardTitle className="text-sm font-semibold text-gray-700 dark:text-gray-300">Stage Breakdown</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-4 gap-3">

@@ -22,8 +22,8 @@ export default function PipelinePage() {
     <div className="p-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-gray-900">Pipeline</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Drag cards between stages to update status</p>
+          <h1 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Pipeline</h1>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">Drag cards between stages to update status</p>
         </div>
         <Button size="sm" onClick={() => setOpen(true)}>
           <Plus className="w-4 h-4 mr-1.5" />
@@ -32,7 +32,7 @@ export default function PipelinePage() {
       </div>
 
       {loading ? (
-        <div className="text-sm text-gray-400">Loading pipeline...</div>
+        <div className="text-sm text-gray-400 dark:text-gray-500">Loading pipeline...</div>
       ) : (
         <KanbanBoard applications={applications} onStageChange={updateStage} />
       )}

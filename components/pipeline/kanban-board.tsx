@@ -53,16 +53,16 @@ function KanbanColumn({
       ref={setNodeRef}
       className={cn(
         "flex-shrink-0 w-60 flex flex-col rounded-xl border",
-        isOver ? "border-blue-300 bg-blue-50" : "border-gray-200 bg-gray-50"
+        isOver ? "border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-950/40" : "border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900"
       )}
     >
-      <div className="flex items-center justify-between px-3 py-2.5 border-b border-gray-200">
+      <div className="flex items-center justify-between px-3 py-2.5 border-b border-gray-200 dark:border-gray-700">
         <div className="flex items-center gap-2">
           <span className={cn("text-xs font-medium px-1.5 py-0.5 rounded border", color)}>
             {label}
           </span>
         </div>
-        <span className="text-xs text-gray-400 font-medium">{cumulativeCount}</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500 font-medium">{cumulativeCount}</span>
       </div>
       <ScrollArea className="flex-1 max-h-[calc(100vh-200px)]">
         <SortableContext

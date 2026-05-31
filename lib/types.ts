@@ -9,14 +9,14 @@ export type ApplicationStage =
   | "withdrawn";
 
 export const STAGES: { id: ApplicationStage; label: string; color: string }[] = [
-  { id: "wishlist", label: "Wishlist", color: "bg-slate-100 text-slate-700 border-slate-200" },
-  { id: "applied", label: "Applied", color: "bg-blue-50 text-blue-700 border-blue-200" },
-  { id: "phone_screen", label: "Phone Screen", color: "bg-purple-50 text-purple-700 border-purple-200" },
-  { id: "technical", label: "Technical", color: "bg-amber-50 text-amber-700 border-amber-200" },
-  { id: "final_round", label: "Final Round", color: "bg-orange-50 text-orange-700 border-orange-200" },
-  { id: "offer", label: "Offer", color: "bg-green-50 text-green-700 border-green-200" },
-  { id: "rejected", label: "Rejected", color: "bg-red-50 text-red-700 border-red-200" },
-  { id: "withdrawn", label: "Withdrawn", color: "bg-gray-50 text-gray-500 border-gray-200" },
+  { id: "wishlist",     label: "Wishlist",     color: "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700" },
+  { id: "applied",      label: "Applied",      color: "bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800" },
+  { id: "phone_screen", label: "Phone Screen", color: "bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800" },
+  { id: "technical",    label: "Technical",    color: "bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800" },
+  { id: "final_round",  label: "Final Round",  color: "bg-orange-50 dark:bg-orange-950 text-orange-700 dark:text-orange-300 border-orange-200 dark:border-orange-800" },
+  { id: "offer",        label: "Offer",        color: "bg-green-50 dark:bg-green-950 text-green-700 dark:text-green-300 border-green-200 dark:border-green-800" },
+  { id: "rejected",     label: "Rejected",     color: "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-200 dark:border-red-800" },
+  { id: "withdrawn",    label: "Withdrawn",    color: "bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700" },
 ];
 
 export const ACTIVE_STAGES: ApplicationStage[] = [

@@ -101,7 +101,7 @@ export default function ApplicationDetailPage() {
     await fetchApp();
   };
 
-  if (loading) return <div className="p-8 text-sm text-gray-400">Loading...</div>;
+  if (loading) return <div className="p-8 text-sm text-gray-400 dark:text-gray-500">Loading...</div>;
   if (!app) return <div className="p-8 text-sm text-red-500">Application not found.</div>;
 
   const stage = STAGES.find((s) => s.id === app.stage);
@@ -110,7 +110,7 @@ export default function ApplicationDetailPage() {
     <div className="p-8 max-w-4xl">
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 mb-6"
+        className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-300 mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -118,8 +118,8 @@ export default function ApplicationDetailPage() {
 
       <div className="flex items-start justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-semibold text-gray-900">{app.role_title}</h1>
-          <p className="text-gray-500 mt-0.5">{app.company?.name}</p>
+          <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{app.role_title}</h1>
+          <p className="text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-0.5">{app.company?.name}</p>
         </div>
         <div className="flex items-center gap-2">
           <Select value={app.stage} onValueChange={(v) => updateStage(v as ApplicationStage)}>
@@ -147,34 +147,34 @@ export default function ApplicationDetailPage() {
 
       <div className="grid grid-cols-3 gap-3 mb-6 text-sm">
         {app.applied_date && (
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <p className="text-xs text-gray-500 font-medium">Applied</p>
-            <p className="text-gray-900 font-medium mt-0.5">{format(new Date(app.applied_date), "MMM d, yyyy")}</p>
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">Applied</p>
+            <p className="text-gray-900 dark:text-gray-100 font-medium mt-0.5">{format(new Date(app.applied_date), "MMM d, yyyy")}</p>
           </div>
         )}
         {(app.salary_min || app.salary_max) && (
-          <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-            <p className="text-xs text-gray-500 font-medium">Salary</p>
-            <p className="text-gray-900 font-medium mt-0.5">
+          <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+            <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">Salary</p>
+            <p className="text-gray-900 dark:text-gray-100 font-medium mt-0.5">
               {app.salary_min ? `$${(app.salary_min / 1000).toFixed(0)}k` : ""}
               {app.salary_max ? `–$${(app.salary_max / 1000).toFixed(0)}k` : ""}
             </p>
           </div>
         )}
-        <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-          <p className="text-xs text-gray-500 font-medium">Priority</p>
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+          <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">Priority</p>
           <p className={cn("font-medium mt-0.5 capitalize", {
-            "text-red-600": app.priority === "high",
+            "text-red-600 dark:text-red-400": app.priority === "high",
             "text-amber-600": app.priority === "medium",
-            "text-gray-500": app.priority === "low",
+            "text-gray-500 dark:text-gray-400 dark:text-gray-500": app.priority === "low",
           })}>{app.priority}</p>
         </div>
       </div>
 
       {app.description && (
-        <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-xs font-medium text-gray-500 mb-1">Notes</p>
-          <p className="text-sm text-gray-700 whitespace-pre-wrap">{app.description}</p>
+        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 dark:text-gray-500 mb-1">Notes</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{app.description}</p>
         </div>
       )}
 
@@ -184,23 +184,23 @@ export default function ApplicationDetailPage() {
 
       {/* Contacts */}
       <div className="mb-6">
-        <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-1.5 mb-3">
-          <User className="w-4 h-4 text-gray-500" />
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-1.5 mb-3">
+          <User className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
           Contacts
         </h2>
         <div className="space-y-2 mb-3">
           {(app.contacts ?? []).map((c: Contact) => (
-            <div key={c.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200">
+            <div key={c.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
               <div>
-                <p className="text-sm font-medium text-gray-900">{c.name}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{c.name}</p>
                 <div className="flex gap-2 mt-0.5 flex-wrap">
-                  {c.role && <span className="text-xs text-gray-500">{c.role}</span>}
+                  {c.role && <span className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{c.role}</span>}
                   {c.email && <a href={`mailto:${c.email}`} className="text-xs text-blue-600 hover:underline">{c.email}</a>}
-                  {c.phone && <a href={`tel:${c.phone}`} className="text-xs text-gray-600">{c.phone}</a>}
+                  {c.phone && <a href={`tel:${c.phone}`} className="text-xs text-gray-600 dark:text-gray-400 dark:text-gray-500">{c.phone}</a>}
                   {c.linkedin && <a href={c.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 hover:underline">LinkedIn</a>}
                 </div>
               </div>
-              <button onClick={() => deleteContact(c.id)} className="text-gray-400 hover:text-red-500">
+              <button onClick={() => deleteContact(c.id)} className="text-gray-400 dark:text-gray-500 hover:text-red-500">
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -224,15 +224,15 @@ export default function ApplicationDetailPage() {
 
       {/* Notes */}
       <div className="mb-6">
-        <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-1.5 mb-3">
-          <StickyNote className="w-4 h-4 text-gray-500" />
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-1.5 mb-3">
+          <StickyNote className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
           Activity Notes
         </h2>
         <div className="space-y-2 mb-3">
           {(app.notes ?? []).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()).map((n: Note) => (
-            <div key={n.id} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
-              <p className="text-xs text-gray-400 mb-1">{format(new Date(n.created_at), "MMM d, yyyy 'at' h:mm a")}</p>
-              <p className="text-sm text-gray-700 whitespace-pre-wrap">{n.content}</p>
+            <div key={n.id} className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-400 dark:text-gray-500 mb-1">{format(new Date(n.created_at), "MMM d, yyyy 'at' h:mm a")}</p>
+              <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{n.content}</p>
             </div>
           ))}
         </div>
@@ -254,8 +254,8 @@ export default function ApplicationDetailPage() {
 
       {/* Follow-ups */}
       <div>
-        <h2 className="text-sm font-semibold text-gray-900 flex items-center gap-1.5 mb-3">
-          <CalendarClock className="w-4 h-4 text-gray-500" />
+        <h2 className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-1.5 mb-3">
+          <CalendarClock className="w-4 h-4 text-gray-500 dark:text-gray-400 dark:text-gray-500" />
           Follow-ups
         </h2>
         <div className="space-y-2 mb-3">
@@ -264,7 +264,7 @@ export default function ApplicationDetailPage() {
               key={f.id}
               className={cn(
                 "flex items-center justify-between p-3 rounded-lg border",
-                f.completed ? "bg-gray-50 border-gray-200 opacity-60" : "bg-amber-50 border-amber-200"
+                f.completed ? "bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700 opacity-60" : "bg-amber-50 dark:bg-amber-950 border-amber-200"
               )}
             >
               <div className="flex items-center gap-2">
@@ -275,10 +275,10 @@ export default function ApplicationDetailPage() {
                   className="rounded"
                 />
                 <div>
-                  <p className={cn("text-sm font-medium", f.completed && "line-through text-gray-500")}>
+                  <p className={cn("text-sm font-medium", f.completed && "line-through text-gray-500 dark:text-gray-400 dark:text-gray-500")}>
                     {format(new Date(f.due_date), "MMM d, yyyy")}
                   </p>
-                  {f.message && <p className="text-xs text-gray-500">{f.message}</p>}
+                  {f.message && <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500">{f.message}</p>}
                 </div>
               </div>
             </div>
