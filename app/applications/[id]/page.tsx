@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FollowUpSuggestion } from "@/components/ai/follow-up-suggestion";
 import { STAGES } from "@/lib/types";
-import type { Application, Contact, Note, FollowUp } from "@/lib/types";
+import type { Application, ApplicationStage, Contact, Note, FollowUp } from "@/lib/types";
 import { format } from "date-fns";
 import { ArrowLeft, Plus, Trash2, ExternalLink, User, StickyNote, CalendarClock } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,6 +38,11 @@ export default function ApplicationDetailPage() {
   // Follow-up form
   const [fuDate, setFuDate] = useState("");
   const [fuMessage, setFuMessage] = useState("");
+
+  const updateStage = async (stage: ApplicationStage) => {
+    await supabase.from("applications").update({ stage }).eq("id", id);
+    setApp((prev) => prev ? { ...prev, stage } : prev);
+  };
 
   const fetchApp = async () => {
     const { data } = await supabase
@@ -117,9 +122,18 @@ export default function ApplicationDetailPage() {
           <p className="text-gray-500 mt-0.5">{app.company?.name}</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className={cn("text-xs font-medium px-2 py-1 rounded border", stage?.color)}>
-            {stage?.label}
-          </span>
+          <Select value={app.stage} onValueChange={(v) => updateStage(v as ApplicationStage)}>
+            <SelectTrigger className={cn("h-7 text-xs font-medium border rounded px-2 w-auto gap-1.5", stage?.color)}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {STAGES.map((s) => (
+                <SelectItem key={s.id} value={s.id} className="text-xs">
+                  {s.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           {app.job_url && (
             <a href={app.job_url} target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm">
