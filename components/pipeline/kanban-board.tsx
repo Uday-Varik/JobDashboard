@@ -15,6 +15,18 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ApplicationCard } from "./application-card";
 import { STAGES, ACTIVE_STAGES } from "@/lib/types";
 import type { Application, ApplicationStage } from "@/lib/types";
+
+// stages that count toward each column's cumulative total
+const CUMULATIVE: Record<ApplicationStage, ApplicationStage[]> = {
+  wishlist:     ["wishlist"],
+  applied:      ["applied", "phone_screen", "technical", "final_round", "offer", "rejected", "withdrawn"],
+  phone_screen: ["phone_screen", "technical", "final_round", "offer"],
+  technical:    ["technical", "final_round", "offer"],
+  final_round:  ["final_round", "offer"],
+  offer:        ["offer"],
+  rejected:     ["rejected"],
+  withdrawn:    ["withdrawn"],
+};
 import { cn } from "@/lib/utils";
 import { useDndDroppable } from "./use-droppable";
 
@@ -23,13 +35,18 @@ function KanbanColumn({
   label,
   color,
   applications,
+  allApplications,
 }: {
   stageId: ApplicationStage;
   label: string;
   color: string;
   applications: Application[];
+  allApplications: Application[];
 }) {
   const { setNodeRef, isOver } = useDndDroppable(stageId);
+  const cumulativeCount = allApplications.filter((a) =>
+    CUMULATIVE[stageId].includes(a.stage)
+  ).length;
 
   return (
     <div
@@ -45,7 +62,7 @@ function KanbanColumn({
             {label}
           </span>
         </div>
-        <span className="text-xs text-gray-400 font-medium">{applications.length}</span>
+        <span className="text-xs text-gray-400 font-medium">{cumulativeCount}</span>
       </div>
       <ScrollArea className="flex-1 max-h-[calc(100vh-200px)]">
         <SortableContext
@@ -116,6 +133,7 @@ export function KanbanBoard({ applications, onStageChange }: Props) {
             label={stage.label}
             color={stage.color}
             applications={applications.filter((a) => a.stage === stage.id)}
+            allApplications={applications}
           />
         ))}
       </div>
