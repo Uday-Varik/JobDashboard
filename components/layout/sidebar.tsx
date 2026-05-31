@@ -1,0 +1,55 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  KanbanSquare,
+  Briefcase,
+  Users,
+  CalendarClock,
+  Sparkles,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+
+const nav = [
+  { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  { href: "/pipeline", label: "Pipeline", icon: KanbanSquare },
+  { href: "/applications", label: "Applications", icon: Briefcase },
+  { href: "/contacts", label: "Contacts", icon: Users },
+  { href: "/follow-ups", label: "Follow-ups", icon: CalendarClock },
+  { href: "/insights", label: "AI Insights", icon: Sparkles },
+];
+
+export function Sidebar() {
+  const path = usePathname();
+
+  return (
+    <aside className="w-56 min-h-screen bg-white border-r border-gray-200 flex flex-col">
+      <div className="px-6 py-5 border-b border-gray-100">
+        <span className="text-base font-semibold text-gray-900 tracking-tight">JobTrack</span>
+        <span className="ml-1.5 text-xs font-medium text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">CRM</span>
+      </div>
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
+        {nav.map(({ href, label, icon: Icon }) => (
+          <Link
+            key={href}
+            href={href}
+            className={cn(
+              "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+              path === href || path.startsWith(href + "/")
+                ? "bg-gray-100 text-gray-900"
+                : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+            )}
+          >
+            <Icon className="w-4 h-4 flex-shrink-0" />
+            {label}
+          </Link>
+        ))}
+      </nav>
+      <div className="px-4 py-4 border-t border-gray-100">
+        <p className="text-xs text-gray-400">Job Application CRM</p>
+      </div>
+    </aside>
+  );
+}
